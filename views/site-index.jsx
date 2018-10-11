@@ -2,7 +2,7 @@ import DefaultLayout from "./components/layout";
 import Tabelle from "./components/tabelle";
 import { createElement } from "complate-stream";
 
-export function SiteIndex({ title, _layout, data }) {
+export function SiteIndex({ title, _layout, data, query }) {
 	let table = <Tabelle searchSrc="/">
 		<table class="tabelle">
 			<thead>
@@ -16,8 +16,8 @@ export function SiteIndex({ title, _layout, data }) {
 					Ort
 					<select name="site" class="tabelle-input">
 						<option></option>
-						<option>DE</option>
-						<option>CE</option>
+						<option selected={query.site === 'DE'}>DE</option>
+						<option selected={query.site === 'CH'}>CH</option>
 					</select>
 				</th>
 			</thead>

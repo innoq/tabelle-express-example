@@ -1,8 +1,10 @@
 "use strict";
 
+
 let express = require("express");
 let complate = require("complate-express");
 let path = require("path");
+let data = require("./people")
 
 const HOST = "localhost";
 const PORT = 3000;
@@ -12,7 +14,7 @@ app.use(complate(path.resolve(__dirname, "../dist/views.js")));
 app.use(express.static('dist'))
 
 app.get("/", (req, res) => {
-	res.complate("SiteIndex", { title: "Hello World" }, {
+	res.complate("SiteIndex", { title: "INNOQ Mitarbeiter", data: data.people }, {
 		fragment: !!req.query.fragment
 	});
 });

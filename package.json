@@ -1,0 +1,21 @@
+{
+	"scripts": {
+		"start": "npm-run-all --parallel server:watch compile:watch",
+		"test": "eslint --cache --ext .js --ext .jsx *.js src views && echo ✓",
+		"server:watch": "nodemon -I -w src -w dist/bundle.js -x 'npm run server'",
+		"server": "node src",
+		"compile:watch": "faucet --watch",
+		"compile": "faucet --compact"
+	},
+	"dependencies": {
+		"complate-express": "^0.16.0",
+		"express": "^4.16.3"
+	},
+	"devDependencies": {
+		"eslint-config-fnd-jsx": "^1.4.0",
+		"faucet-pipeline-jsx": "^1.0.0",
+		"faucet-pipeline-sass": "^1.0.0",
+		"nodemon": "^1.17.5",
+		"npm-run-all": "^4.1.3"
+	}
+}

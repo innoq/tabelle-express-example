@@ -15,6 +15,7 @@ export function SiteIndex({ title, _layout, data }) {
 				<th name="site">
 					Ort
 					<select name="site" class="tabelle-input">
+						<option></option>
 						<option>DE</option>
 						<option>CE</option>
 					</select>

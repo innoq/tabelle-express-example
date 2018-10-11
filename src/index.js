@@ -13,15 +13,21 @@ let app = express();
 app.use(complate(path.resolve(__dirname, "../dist/views.js")));
 app.use(express.static('dist'))
 
+
+
+function filter(query) {
+	console.log(query)
+	return data.people
+		.filter(p => p.fullname.toLowerCase().includes(query.fullname.toLowerCase()))
+		.filter(p => p.username.toLowerCase().includes(query.username.toLowerCase()))
+		.filter(p => p.site.toLowerCase().includes(query.site.toLowerCase()))
+}
+
 app.get("/", (req, res) => {
-	res.complate("SiteIndex", { title: "INNOQ Mitarbeiter", data: data.people }, {
+	res.complate("SiteIndex", { title: "INNOQ Mitarbeiter", data: filter(req.query) }, {
 		fragment: !!req.query.fragment
 	});
 });
-
-// app.get("/bootstrap", (req, res) => {
-// 	res.complate("BootstrapSample", { title: "Boostrap sample" });
-// });
 
 let server = app.listen(PORT, HOST, _ => {
 	let { address, port } = server.address();

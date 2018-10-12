@@ -3,21 +3,24 @@ import Tabelle from "./components/tabelle";
 import { createElement } from "complate-stream";
 
 export function SiteIndex({ title, _layout, data, query }) {
+	const sites = ['DE', 'CH', 'US', 'UK']
+
 	let table = <Tabelle searchSrc="/">
-		<table class="tabelle">
+		<table class="tabelle tabelle--sticky">
 			<thead>
-				<th name="username">
+				<th name="username" value={query.username}>
 					Kürzel
 				</th>
-				<th name="fullname">
+				<th name="fullname" value={query.fullname}>
 					Fullname
 				</th>
 				<th name="site">
 					Ort
 					<select name="site" class="tabelle-input">
 						<option></option>
-						<option selected={query.site === 'DE'}>DE</option>
-						<option selected={query.site === 'CH'}>CH</option>
+						{
+							sites.map(s => <option selected={query.site === s}>{s}</option>)
+						}
 					</select>
 				</th>
 			</thead>
@@ -31,8 +34,8 @@ export function SiteIndex({ title, _layout, data, query }) {
 		</table>
 	</Tabelle>
 
-	const styles = ['/tabelle.css']
-	const scripts = ['/polyfills.js', '/tabelle.js']
+	const styles = ['https://unpkg.com/tabelle@0.0.8/dist/tabelle.css']
+	const scripts = ['https://unpkg.com/tabelle@0.0.8/dist/polyfills.js', 'https://unpkg.com/tabelle@0.0.8/dist/tabelle.js']
 
 	return _layout === false ? table :
 	<DefaultLayout title={title} stylesheets={styles} scripts={scripts}>

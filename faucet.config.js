@@ -7,9 +7,4 @@ module.exports = {
 		format: "commonjs",
 		jsx: { pragma: "createElement" }
 	}]
-	// manifest: {
-  //   target: './dist/manifest.json',
-  //   key: 'short',
-  //   webRoot: './dist'
-  // }
 };

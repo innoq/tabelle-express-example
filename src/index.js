@@ -4,8 +4,7 @@
 let express = require("express");
 let complate = require("complate-express");
 let path = require("path");
-let data = require("./people")
-let people = data.people
+let data = require("./example")
 
 const HOST = "localhost";
 const PORT = 3000;
@@ -34,7 +33,7 @@ function filterColumn(key, filterValue) {
 }
 
 function filter(query) {
-	let filtered = data.people
+	let filtered = data
 		.filter(filterColumn('fullname', query.fullname))
 		.filter(filterColumn('username', query.username))
 		.filter(filterColumn('site', query.site))
@@ -48,13 +47,10 @@ function filter(query) {
 	let direction = split[1]
 
 	return filtered.sort(sortBy(key, direction))
-		// .filter(p => p.fullname.toLowerCase().includes(query.fullname.toLowerCase()))
-		// .filter(p => p.username.toLowerCase().includes(query.username.toLowerCase()))
-		// .filter(p => p.site.toLowerCase().includes(query.site.toLowerCase()))
 }
 
 app.get("/", (req, res) => {
-	res.complate("SiteIndex", { title: "INNOQ Mitarbeiter", data: filter(req.query), query: req.query }, {
+	res.complate("SiteIndex", { title: "People", data: filter(req.query), query: req.query }, {
 		fragment: !!req.query.fragment
 	});
 });

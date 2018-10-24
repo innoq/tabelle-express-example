@@ -6,6 +6,11 @@ export default function DefaultLayout({ title, stylesheets, scripts, bodyClass }
 			<meta charset="utf-8" />
 			<title>{title}</title>
 			{renderStyleSheets(stylesheets)}
+			<style>
+				{`body {
+					margin-left: 4rem;
+				}`}
+			</style>
 		</head>
 
 		<body class={bodyClass}>

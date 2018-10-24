@@ -5,7 +5,11 @@ import { createElement } from "complate-stream";
 export function SiteIndex({ title, _layout, data, query }) {
 	const sites = ['DE', 'CH', 'US', 'UK']
 
-	let table = <Tabelle searchSrc="/">
+	const tbody = data.length === 0 ? '' : data.map(d => {
+		return <tr><td>{d.username}</td><td>{d.fullname}</td><td>{d.site}</td></tr>
+	})
+	const message = data.length === 0 ? <p>{'Sorry! No results were found for those search filters!'}</p> : ''
+	let table = <Tabelle id="tabelle" searchSrc="/">
 		<table class="tabelle tabelle--sticky">
 			<thead>
 				<th name="username" value={query.username}>
@@ -24,18 +28,13 @@ export function SiteIndex({ title, _layout, data, query }) {
 					</select>
 				</th>
 			</thead>
-			<tbody>
-				{
-					data.map(d => {
-						return <tr><td>{d.username}</td><td>{d.fullname}</td><td>{d.site}</td></tr>
-					})
-				}
-			</tbody>
+			{tbody}
 		</table>
+		{message}
 	</Tabelle>
 
-	const styles = ['https://unpkg.com/tabelle@0.0.8/dist/tabelle.css']
-	const scripts = ['https://unpkg.com/tabelle@0.0.8/dist/polyfills.js', 'https://unpkg.com/tabelle@0.0.8/dist/tabelle.js']
+	const styles = ['https://unpkg.com/tabelle@0.0.13/dist/tabelle.css']
+	const scripts = ['https://unpkg.com/tabelle@0.0.13/dist/polyfills.js', 'https://unpkg.com/tabelle@0.0.13/dist/tabelle.js']
 
 	return _layout === false ? table :
 	<DefaultLayout title={title} stylesheets={styles} scripts={scripts}>
